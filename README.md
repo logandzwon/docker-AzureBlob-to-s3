@@ -22,3 +22,8 @@ Launch the docker container on your server:
 
     docker run -d -e AWS_ACCESS_KEY_ID=AKI**** -e AZURE_URI=https://mystorageaccount.blob.core.windows.net/mycontainer -e AZURE_SAS=<SAS-token> -e AWS_ID=AKI**** -e AWS_Key=epek**** -e AWS_S3_BUCKET=mybucket logandzwon/docker-azcopy-to-s3
 
+
+
+If you need to gerate a SAS key see the following link.
+-----------------------------------------------------------------
+https://ntsystems.it/post/Create-a-SAS-token-for-AzCopy
