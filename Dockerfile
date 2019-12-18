@@ -37,6 +37,6 @@ RUN git clone https://github.com/s3fs-fuse/s3fs-fuse \
     && mkdir /mnt/s3bucket
 
 # Entrypoint
-COPY entrypoint.sh /
+ADD entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/bin/bash", "-c", "/entrypoint.sh"]
 
