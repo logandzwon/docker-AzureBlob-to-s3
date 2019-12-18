@@ -2,6 +2,7 @@
 
 # mount the s3 bucket
 echo "$AWS_ID:$AWS_Key" > ~/.passwd-s3fs
+chmod 600 ~/.passwd-s3fs
 s3fs -o use_cache=/tmp/cache $AWS_S3_BUCKET /mnt/s3bucket
 
 # start the file transfer
