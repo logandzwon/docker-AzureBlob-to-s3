@@ -15,7 +15,7 @@ RUN apt-get update \
          automake \
          libtool \
          pkg-config \
-         libssl-dev
+         libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install AZcopy
