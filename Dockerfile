@@ -3,6 +3,7 @@ LABEL maintainer "Logan Dzwonkowski logan.dzwonkowski@envisionhealth.com"
 
 # Install required packages
 RUN apt-get update \
+    && apt-get -q -y dist-upgrade \
     && apt-get install -y --no-install-recommends \
          ca-certificates \
          curl \
@@ -15,9 +16,7 @@ RUN apt-get update \
          automake \
          libtool \
          pkg-config \
-         libssl-dev \
-	 fuse \
-	 s3fs
+         libssl-dev 
 #    && apt-get clean \
 #    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	 
 
@@ -30,22 +29,20 @@ RUN set -ex \
     && rm -rf azcopy_linux_amd64_10.2.1
 
 # Install S3FS to mount S3 bucket
-#RUN git clone https://github.com/s3fs-fuse/s3fs-fuse \
-#    && cd s3fs-fuse \
-#    && ./autogen.sh && ./configure --prefix=/usr --with-openssl && make && make install \
-#    && cd .. \
-#    && rm -rf s3fs-fuse \
-#    && mkdir /tmp/cache \
-#    && chmod 777 /tmp/cache \
-#    && mkdir /mnt/s3bucket
+RUN git clone https://github.com/s3fs-fuse/s3fs-fuse \
+    && cd s3fs-fuse \
+    && ./autogen.sh && ./configure --prefix=/usr --with-openssl && make && make install \
+    && cd .. \
+    && rm -rf s3fs-fuse \
+    && mkdir /tmp/cache \
+    && chmod 777 /tmp/cache \
+    && mkdir /mnt/s3bucket
 
 # Entrypoint
 ADD entrypoint.sh /entrypoint.sh
 #ENTRYPOINT ["sh", "/entrypoint.sh"]
 
-RUN apt-get update \
-	    && apt-get -q -y dist-upgrade \
-	    && apt-get -q -y install --no-install-recommends openssh-server \
+RUN apt-get -q -y install --no-install-recommends openssh-server \
 	    && apt-get clean \
 	    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
