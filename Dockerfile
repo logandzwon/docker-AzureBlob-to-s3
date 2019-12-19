@@ -7,16 +7,11 @@ RUN apt-get update \
     && apt-get install -y --no-install-recommends \
          ca-certificates \
          curl \
-         build-essential \
-         git \
-         libfuse-dev \
-         libcurl4-openssl-dev \
-         libxml2-dev \
-         mime-support \
-         automake \
-         libtool \
-         pkg-config \
-         libssl-dev 
+         build-essential
+
+#Install nodejs repo
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install -y nodejs \
 #    && apt-get clean \
 #    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	 
 
@@ -27,16 +22,6 @@ RUN set -ex \
     && cp ./azcopy_linux_amd64_10.2.1/azcopy /usr/local/bin/. \
     && chmod +x /usr/local/bin/azcopy \
     && rm -rf azcopy_linux_amd64_10.2.1
-
-# Install S3FS to mount S3 bucket
-RUN git clone https://github.com/s3fs-fuse/s3fs-fuse \
-    && cd s3fs-fuse \
-    && ./autogen.sh && ./configure --prefix=/usr --with-openssl && make && make install \
-    && cd .. \
-    && rm -rf s3fs-fuse \
-    && mkdir /tmp/cache \
-    && chmod 777 /tmp/cache \
-    && mkdir /mnt/s3bucket
 
 # Entrypoint
 ADD entrypoint.sh /entrypoint.sh
