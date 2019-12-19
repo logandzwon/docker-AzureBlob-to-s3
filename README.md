@@ -1,8 +1,9 @@
 Azure storage to S3 Docker Image
 =============================
-This image contains S3FS and azcopy over a debin stretch slim. The goal to have a simple one show conatiner spin up and copy everything in the Azure stoage conatiner to an S3 bucket. 
+This image contains uses azure-blob-to-s3 under nodejs. The goal to have a simple one show conatiner spin up and copy everything in the Azure stoage conatiner to an S3 bucket. 
 
-It was originally forked from datenbetrieb/docker-azcopy .
+https://github.com/bendrucker/azure-blob-to-s3
+
 
 How to use
 -------------
