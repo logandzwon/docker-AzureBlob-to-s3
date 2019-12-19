@@ -5,23 +5,16 @@ LABEL maintainer "Logan Dzwonkowski logan.dzwonkowski@envisionhealth.com"
 RUN apt-get update \
     && apt-get -q -y dist-upgrade \
     && apt-get install -y --no-install-recommends \
-         ca-certificates \
-         curl \
-         build-essential
+         python3-pip \
+	 curl
 
 # Install nodejs repo and nodejs
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt-get install -y nodejs
 #    && apt-get clean \
-#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*	 
+#    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# Install AZcopy
-RUN set -ex \
-    && curl -L -o azcopy.tar.gz https://azcopyvnext.azureedge.net/release20190703/azcopy_linux_amd64_10.2.1.tar.gz \
-    && tar -xzf azcopy.tar.gz && rm -f azcopy.tar.gz \
-    && cp ./azcopy_linux_amd64_10.2.1/azcopy /usr/local/bin/. \
-    && chmod +x /usr/local/bin/azcopy \
-    && rm -rf azcopy_linux_amd64_10.2.1
+RUN npm install --save azure-blob-to-s3
 
 # Entrypoint
 ADD entrypoint.sh /entrypoint.sh
