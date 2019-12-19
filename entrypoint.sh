@@ -15,13 +15,9 @@ azcopy copy "'$AZURE_URI?$AZURE_SAS'" /mnt/s3bucket --recursive
 
 echo 'root:root' |chpasswd
 
-apt-get install openssh-server
+apt-get install -y --no-install-recommends openssh-server
 
 sed -ri 's/^PermitRootLogin\s+.*/PermitRootLogin yes/' /etc/ssh/sshd_config && \
 sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
 
-systemctl restart ssh.service
-systemctl enable ssh.service
-
-sleep 600000
-
+/usr/sbin/sshd
