@@ -1,6 +1,6 @@
 #! /bin/sh
 
-/root/node_modules/.bin/azure-s3 \
+/node_modules/.bin/azure-s3 \
     --concurrency "'$CONCURRENCY'" \
     --azure-connection "'$AZURE_CONNECTION'" \
     --azure-container "'AZURE_CONTAINER'" \
