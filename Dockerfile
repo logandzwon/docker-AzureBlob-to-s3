@@ -9,7 +9,7 @@ RUN apt-get update \
          curl \
          build-essential
 
-#Install nodejs repo and nodejs
+# Install nodejs repo and nodejs
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - \
     && apt-get install -y nodejs
 #    && apt-get clean \
